@@ -31,13 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Loader sits at the top layer */}
         <PageLoader />
-
-        {/* Persistent Navbar */}
         <Navbar />
         
-        {/* Page transitions for the main content */}
         <TransitionProvider>
           {children}
           <Footer />

@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
       <Hero />
-
       <section className="container mx-auto px-6 py-12">
         <h3 className="text-2xl font-semibold mb-6 text-black">
           Featured Books
@@ -150,8 +149,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      
     </main>
   );
 }
