@@ -1,9 +1,28 @@
-// app/page.tsx
+"use client";
 import Hero from "@/components/hero";
-import Navbar from "@/components/navbar";
+import { useRouter} from 'next/navigation'
 import Image from "next/image";
+import { useEffect } from "react";
+import { connectDb } from "@/lib/connectDb";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    const connectToDatabase = async () => {
+      try {
+        await connectDb();
+        console.log("✅ Database connected");
+        
+      } catch (error) {
+        console.error("❌ Database connection failed:", error);
+      }
+    };
+
+    connectToDatabase();
+    
+
+  }, []);
+
   return (
     <main className="min-h-screen flex flex-col bg-white">
       <Hero />
