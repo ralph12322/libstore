@@ -1,7 +1,7 @@
 "use server";
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb+srv://dwanerz:Nezuko17%3F@cluster0.d62d0.mongodb.net';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error('MONGODB_URI not defined');
