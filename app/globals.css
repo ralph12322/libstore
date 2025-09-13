@@ -29,6 +29,9 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
 
 body {
   background: var(--background);

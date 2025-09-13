@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import logo from "../public/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,11 +28,11 @@ export default function Navbar() {
         {/* Logo */}
 
         <Image
-          src="https://img.freepik.com/premium-vector/rr-logo-design_566521-43.jpg"
+          src={logo}
           alt="Bookstore Logo"
-          width={50}
-          height={50}
-          className="object-contain drop-shadow-md"
+          width={70}
+          height={70}
+          className="object-contain drop-shadow-md rounded-2xl"
         />
 
         {/* Desktop Menu */}

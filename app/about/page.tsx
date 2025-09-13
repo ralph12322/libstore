@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 export default function AboutPage() {
   return (
     <>
-      <section className="w-full h-[84.5vh] bg-gradient-to-br from-white via-steelblue-100 to-purple-100 flex items-center justify-center px-6 py-16">
+      <section className="w-full h-[80.5vh] bg-gradient-to-br from-white via-steelblue-100 to-purple-100 flex items-center justify-center px-6 py-16">
         <div className="max-w-4xl text-center">
           <h1 className="text-5xl font-extrabold text-purple-800 mb-6">
             About <span className="text-steelblue-600">Us</span>

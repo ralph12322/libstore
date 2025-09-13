@@ -47,11 +47,11 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="h-[84.5vh] bg-gradient-to-b from-purple-900 via-purple-800 to-blue-900 text-white flex flex-col items-center">
+    <div className="h-[80.5vh] bg-gradient-to-b from-purple-900 via-purple-800 to-blue-900 text-white flex flex-col items-center">
       {/* Header Section */}
-      <div className="w-full bg-black transition 
+      <div className="w-full bg-black opacity-80 transition 
               hover:shadow-[0_8px_20px_rgba(120,81,169,0.6)]   /* Royal Purple glow */
-              hover:-translate-y-1 py-12 text-center shadow-lg">
+              hover:-translate-y-1 py-12 text-center shadow-lg mb-10">
         <h1 className="text-4xl font-bold">My Profile</h1>
         <p className="text-gray-200 mt-2">Manage your account & preferences</p>
       </div>
