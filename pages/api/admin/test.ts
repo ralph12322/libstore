@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const books = await Book.find();
       res.status(200).json(books);
-    } catch (error) {
+    } catch (error: unknown) {
       res.status(500).json({ message: 'Internal Server Error'});
     }
   } 
