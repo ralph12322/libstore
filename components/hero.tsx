@@ -13,7 +13,7 @@ export default function Hero() {
             Read and Roam offers a curated selection of books that ignite your imagination and fuel your passion for reading.
           </p>
           <a
-            href="#"
+            href="https://www.facebook.com/pawns88" target="_blank"
             className="inline-block bg-[#7851A9] text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:bg-[#5e3e8a] hover:shadow-xl hover:scale-105 transition transform"
           >
             Shop Now
