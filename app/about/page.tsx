@@ -27,7 +27,7 @@ export default function AboutPage() {
 
           <p className="text-lg text-gray-800 leading-relaxed">
             Join us in celebrating the joy of reading, one page at a time!{" "}
-            <span className="text-2xl">📖</span>
+            <span className="text-2xl">🍂</span>
           </p>
         </div>
       </section>
