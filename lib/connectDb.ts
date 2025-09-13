@@ -14,8 +14,8 @@ export const connectDb = async () => {
 
   try {
     await mongoose.connect(MONGODB_URI, {
-  dbName: 'tracktag',
-});
+      dbName: 'tracktag',
+    });
 
     isConnected = true;
     console.log('MongoDB connected');

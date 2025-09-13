@@ -1,14 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { Book } from '@/lib/model/books';
+// pages/api/admin/test.ts
+import type { NextApiRequest, NextApiResponse } from "next";
+import { connectDb } from "@/lib/connectDb";
+import {User} from "@/lib/model/user";
 
-// Example: Using cookies for session management
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    try {
-      const books = await Book.find();
-      res.status(200).json(books);
-    } catch (error: unknown) {
-      res.status(500).json({ message: 'Internal Server Error'});
-    }
-  } 
+  try {
+    await connectDb();
+    const users = await User.find({});
+    res.status(200).json({ success: true, users });
+  } catch (err: any) {
+    console.error("API error:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
 }
