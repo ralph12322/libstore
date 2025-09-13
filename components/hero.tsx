@@ -16,7 +16,7 @@ export default function Hero() {
             href="https://www.facebook.com/pawns88" target="_blank"
             className="inline-block bg-[#7851A9] text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:bg-[#5e3e8a] hover:shadow-xl hover:scale-105 transition transform"
           >
-            Shop Now
+            Handsome
           </a>
         </div>
 
