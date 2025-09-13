@@ -25,7 +25,6 @@ export default function Navbar() {
     <header className="bg-gradient-to-r from-purple-900 via-purple-700 to-blue-700 sticky top-0 z-50 shadow-lg shadow-purple-900/30">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
-        <Link href="/test" className="flex items-center space-x-2">
 
         <Image
           src="https://img.freepik.com/premium-vector/rr-logo-design_566521-43.jpg"
@@ -34,8 +33,6 @@ export default function Navbar() {
           height={50}
           className="object-contain drop-shadow-md"
         />
-        </Link>
-
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8">
