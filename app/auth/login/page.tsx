@@ -48,8 +48,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center mt-7 justify-center bg-gray-100 px-6">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+    <div className="flex h-[84.5vh] items-center justify-center bg-gray-100 px-6">
+      <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white">
         <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">
           Log In to Your Account
         </h1>

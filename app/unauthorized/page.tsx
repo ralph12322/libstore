@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Unauthorized() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center h-[84.5vh] bg-gray-100 p-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md text-center">
         <h1 className="text-3xl font-bold text-red-600 mb-4">
           ⚠ You must be logged in first

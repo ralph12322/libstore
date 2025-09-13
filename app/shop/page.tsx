@@ -1,105 +1,21 @@
 // app/shop/page.tsx
 "use client";
 
-import { useState } from "react";
-
-type Book = {
-  id: number;
-  title: string;
-  author: string;
-  price: number;
-  image: string;
-};
-
-const books: Book[] = [
-  {
-    id: 1,
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    price: 12,
-    image: "https://m.media-amazon.com/images/I/718Bb1aU71L._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 2,
-    title: "Me and My Jowa",
-    author: "George Orwell",
-    price: 26,
-    image: "https://m.media-amazon.com/images/I/81cPazH8X7L.jpg",
-  },
-  {
-    id: 3,
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    price: 10,
-    image: "https://m.media-amazon.com/images/I/51BiP6i+qIL._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 4,
-    title: "Pride and Prejudice",
-    author: "Jane Austen",
-    price: 3,
-    image: "https://m.media-amazon.com/images/I/71r-M3Ndx3L._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 5,
-    title: "Billy Joe",
-    author: "F. Scott Fitzgerald",
-    price: 12,
-    image: "https://m.media-amazon.com/images/I/718Bb1aU71L._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 6,
-    title: "Charlie Kirk",
-    author: "George Orwell",
-    price: 15,
-    image: "https://m.media-amazon.com/images/I/81cPazH8X7L.jpg",
-  },
-  {
-    id: 7,
-    title: "Be a Hero",
-    author: "Harper Lee",
-    price: 10,
-    image: "https://m.media-amazon.com/images/I/51BiP6i+qIL._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 8,
-    title: "Atomic Habits",
-    author: "Jane Austen",
-    price: 8,
-    image: "https://m.media-amazon.com/images/I/71r-M3Ndx3L._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 9,
-    title: "Believer",
-    author: "F. Scott Fitzgerald",
-    price: 19,
-    image: "https://m.media-amazon.com/images/I/718Bb1aU71L._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 10,
-    title: "Making an Impact",
-    author: "George Orwell",
-    price: 15,
-    image: "https://m.media-amazon.com/images/I/81cPazH8X7L.jpg",
-  },
-  {
-    id: 11,
-    title: "Michael's Life",
-    author: "Harper Lee",
-    price: 12,
-    image: "https://m.media-amazon.com/images/I/51BiP6i+qIL._UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 12,
-    title: "Being Alone Again",
-    author: "Jane Austen",
-    price: 23,
-    image: "https://m.media-amazon.com/images/I/71r-M3Ndx3L._UF1000,1000_QL80_.jpg",
-  },
-];
+import { useState, useEffect } from "react";
 
 export default function ShopPage() {
   const [sortOption, setSortOption] = useState("title");
+  const [books, setBooks] = useState<Array<{ id: number; title: string; author: string; price: number; image: string }>>([]);
+
+  useEffect(() => {
+    // Simulate fetching books from an API or database
+    const fetchBooks = async () => {
+      const response = await fetch('/api/admin/test');
+      const data = await response.json();
+      setBooks(data);
+    };
+    fetchBooks();
+  }, []);
 
   const sortedBooks = [...books].sort((a, b) => {
     if (sortOption === "title") return a.title.localeCompare(b.title);
@@ -151,10 +67,18 @@ export default function ShopPage() {
 
         {/* Books Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {sortedBooks.map((book) => (
+          {sortedBooks.map((book, index) => (
             <div
-              key={book.id}
-              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
+              key={index}
+              className="
+              bg-white 
+              rounded-2xl 
+              shadow-md 
+              overflow-hidden 
+              transition 
+              hover:shadow-[0_8px_20px_rgba(120,81,169,0.6)]   /* Royal Purple glow */
+              hover:-translate-y-1 
+              hover:scale-[1.02]"
             >
               <img
                 src={book.image}

@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 export default function ContactPage() {
   return (
     <>
-      <section className="min-h-[92.5vh] bg-gradient-to-br from-white via-steelblue-100 to-purple-100 flex items-center justify-center px-6 py-16">
+      <section className="min-h-[84.5vh] bg-gradient-to-br from-white via-steelblue-100 to-purple-100 flex items-center justify-center px-6 py-16">
         <div className="max-w-4xl w-full bg-white rounded-2xl shadow-lg p-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-center text-purple-800 mb-8">
             Get in <span className="text-steelblue-600">Touch</span>

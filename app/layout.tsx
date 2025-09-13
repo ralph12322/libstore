@@ -1,13 +1,8 @@
-"use "
-
+// app/layout.tsx (SERVER)
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import PageLoader from "@/components/PageLoader";
-import TransitionProvider from "@/components/transition-provider";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import { Toaster } from "react-hot-toast"; // ✅ import Toaster
+import AuthProvider from "./authProvider/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,32 +19,13 @@ export const metadata: Metadata = {
   description: "An aesthetic online bookstore built with Next.js",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Toast container */}
-        <Toaster 
-          position="top-right" 
-          toastOptions={{
-            duration: 3000,
-            style: { fontFamily: "var(--font-geist-sans)" },
-          }}
-        />
-
-        <PageLoader />
-        <Navbar />
-
-        <TransitionProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <AuthProvider>
           {children}
-          <Footer />
-        </TransitionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -2,8 +2,11 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -19,16 +22,33 @@ export default function SignupPage() {
     e.preventDefault();
     // TODO: Connect to your backend or API
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
-    console.log("User Registered:", form);
-    alert("Signup successful! 🚀");
+    toast.loading("Signing up...", { duration: 2000 });
+    const res = fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: form.name, email: form.email, password: form.password }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          toast.success('Account created successfully! Redirecting to login...');
+          router.replace('/auth/login');
+        } else {
+          toast.error(data.error || 'Signup failed. Please try again.');
+        }
+      })
+      .catch((error) => {
+        console.error('Signup failed:', error);
+        toast.error('Signup failed. Please try again.');
+      });
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-6">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+    <div className="flex h-[84.5vh] items-center justify-center bg-gray-100 px-6">
+      <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white">
         <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">
           Create an Account
         </h1>
@@ -97,7 +117,7 @@ export default function SignupPage() {
 
         <p className="text-sm text-gray-600 text-center mt-4">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
+          <a href="/auth/login" className="text-blue-600 hover:underline">
             Log in
           </a>
         </p>

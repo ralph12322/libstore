@@ -17,10 +17,7 @@ export default function Home() {
         console.error("❌ Database connection failed:", error);
       }
     };
-
     connectToDatabase();
-    
-
   }, []);
 
   return (
