@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextApiRequest, NextApiResponse } from 'next';
 import { jwtVerify } from 'jose';
 
@@ -16,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!user) return res.status(401).json({ error: 'Invalid token structure' });
 
     res.status(200).json({ user });
-  } catch (err : unknown) {
+  } catch (err : any) {
     return res.status(401).json({ error: 'Invalid token' });
   }
 }
