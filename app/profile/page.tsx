@@ -1,12 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { User, Edit, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const [editing, setEditing] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch('/api/auth/me', { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          console.log('User profile:', data);
+          setEmail(data.email || 'UNKNOWN');
+          setUsername(data.username || 'UNKNOWN');
+          setLocation(data.location || 'PHILIPPINES');
+        }
+      } catch (error) {
+        console.error('Failed to fetch profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -50,9 +72,9 @@ export default function ProfilePage() {
 
         {/* Info */}
         <div className="mt-6 text-center">
-          <h2 className="text-2xl font-bold text-black">John Doe</h2>
-          <p className="text-gray-600">johndoe@email.com</p>
-          <p className="mt-2 text-gray-700">📍 Calamba, Laguna</p>
+          <h2 className="text-2xl font-bold text-black">{username}</h2>
+          <p className="text-gray-600">{email}</p>
+          <p className="mt-2 text-gray-700">📍 {location}</p>
         </div>
 
         {/* Buttons */}

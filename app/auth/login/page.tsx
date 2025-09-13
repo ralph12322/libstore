@@ -30,7 +30,6 @@ export default function LoginPage() {
       console.log('Login response:', data);
 
       if (res.ok) {
-        console.log('Auth Token:', data.token);
         toast.success('Login successful!');
         window.dispatchEvent(new Event('user-updated'));
         if (data.role === 'Admin') {
