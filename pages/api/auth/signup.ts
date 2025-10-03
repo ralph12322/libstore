@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcrypt';
 import { User } from '@/lib/model/user';
+import { connectDb } from '@/lib/connectDb';
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end();
 
+  await connectDb();
   const { username, email, password } = req.body;
 
   const existingMail = await User.findOne({ email });
