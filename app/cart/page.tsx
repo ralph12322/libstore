@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export default function CartPage() {
   const [cart, setCart] = useState([
@@ -126,9 +127,7 @@ export default function CartPage() {
               <span>${total.toFixed(2)}</span>
             </div>
           </div>
-          <button className="w-full mt-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 transition font-semibold">
-            Proceed to Checkout
-          </button>
+          <CheckoutButton amount={Math.round(total * 100)} />
         </div>
       </div>
     </div>
