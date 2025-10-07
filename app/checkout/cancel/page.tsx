@@ -1,4 +1,5 @@
-// pages/checkout/cancel.tsx
+"use client";
+
 import Link from "next/link";
 import { XCircle } from "lucide-react";
 

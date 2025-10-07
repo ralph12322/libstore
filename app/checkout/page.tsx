@@ -1,4 +1,5 @@
-// pages/checkout/index.tsx
+"use client";
+
 import { useState } from "react";
 import CheckoutButton from "@/components/CheckoutButton";
 
