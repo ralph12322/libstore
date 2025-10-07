@@ -1,5 +1,7 @@
+"use client";
+
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface CartItem {
   id: number;
@@ -14,7 +16,10 @@ interface CartState {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
+  setUserKey: (key: string) => void;
 }
+
+let userStorageKey = "cart-storage-default";
 
 export const useCartStore = create<CartState>()(
   persist(
@@ -38,9 +43,15 @@ export const useCartStore = create<CartState>()(
         set({ cart: get().cart.filter((item) => item.id !== id) }),
 
       clearCart: () => set({ cart: [] }),
+
+      // Dynamically change which key is used for storage
+      setUserKey: (key) => {
+        userStorageKey = `cart-storage-${key}`;
+      },
     }),
     {
-      name: "cart-storage", // 🧠 unique key for localStorage
+      name: userStorageKey,
+      storage: createJSONStorage(() => localStorage), // ✅ correct usage
     }
   )
 );

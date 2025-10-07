@@ -1,13 +1,15 @@
-// app/signup/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";  
-
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/lib/store/cartstore";
 
 export default function LoginPage() {
   const router = useRouter();
+  const setUserKey = useCartStore((state) => state.setUserKey);
+  const clearCart = useCartStore((state) => state.clearCart);
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -19,30 +21,46 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, password: form.password }),
       });
 
       const data = await res.json();
-      console.log('Login response:', data);
+      console.log("Login response:", data);
 
       if (res.ok) {
-        toast.success('Login successful!');
-        window.dispatchEvent(new Event('user-updated'));
-        if (data.role === 'Admin') {
-          router.push('/auth/admin');
+        toast.success("Login successful!");
+
+        // 🧠 Set unique cart key for this user
+        setUserKey(form.email);
+
+        // 🧹 Clear cart in memory to avoid mixing from previous users
+        clearCart();
+
+        // 🧩 Force Zustand to reload from new storage key
+        setTimeout(() => {
+          window.dispatchEvent(new Event("storage"));
+        }, 100);
+
+        // 🔁 Trigger global user state update
+        window.dispatchEvent(new Event("user-updated"));
+
+        // ✅ Redirect based on role
+        if (data.role === "Admin") {
+          router.push("/auth/admin");
         } else {
-          router.push('/');
+          router.push("/");
         }
       } else {
-        toast.error(`${data.error}`);
+        toast.error(data.error || "Invalid credentials");
       }
     } catch (error) {
-      console.error('Login failed:', error);
-      toast.error('Login failed. Please try again.');
+      console.error("Login failed:", error);
+      toast.error("Login failed. Please try again.");
     }
   };
 
@@ -54,9 +72,6 @@ export default function LoginPage() {
         </h1>
 
         <form onSubmit={handleLogin} className="space-y-4">
-        
-         
-
           {/* Email */}
           <div>
             <label className="block text-gray-700 mb-1">Email</label>
@@ -83,7 +98,6 @@ export default function LoginPage() {
             />
           </div>
 
-        
           {/* Submit Button */}
           <button
             type="submit"
@@ -94,7 +108,7 @@ export default function LoginPage() {
         </form>
 
         <p className="text-sm text-gray-600 text-center mt-4">
-          Already have an account?{" "}
+          Don’t have an account?{" "}
           <a href="/auth/signup" className="text-blue-600 hover:underline">
             Sign Up
           </a>
