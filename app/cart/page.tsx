@@ -116,15 +116,15 @@ export default function CartPage() {
           <div className="space-y-2 text-gray-200">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>${subtotal.toFixed(2)}</span>
+              <span>₱{subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>₱{shipping.toFixed(2)}</span>
             </div>
             <div className="border-t border-gray-600 pt-2 flex justify-between text-lg font-semibold">
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>₱{total.toFixed(2)}</span>
             </div>
           </div>
           <CheckoutButton amount={Math.round(total * 100)} />

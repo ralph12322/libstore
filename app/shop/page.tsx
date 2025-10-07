@@ -90,7 +90,7 @@ export default function ShopPage() {
                   {book.title}
                 </h3>
                 <p className="text-sm text-gray-500 mb-2">{book.author}</p>
-                <p className="text-purple-700 font-bold">${book.price}</p>
+                <p className="text-purple-700 font-bold">₱{book.price}</p>
               </div>
             </div>
           ))}
