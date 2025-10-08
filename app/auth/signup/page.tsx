@@ -63,7 +63,7 @@ export default function SignupPage() {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg text-black px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -76,7 +76,7 @@ export default function SignupPage() {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg text-black px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -89,7 +89,7 @@ export default function SignupPage() {
               value={form.password}
               onChange={handleChange}
               required
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg text-black px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -102,7 +102,7 @@ export default function SignupPage() {
               value={form.confirmPassword}
               onChange={handleChange}
               required
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg px-3 text-black py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
