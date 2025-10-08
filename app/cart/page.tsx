@@ -13,12 +13,12 @@ export default function CartPage() {
       cart: state.cart.map((item) =>
         item.id === id
           ? {
-              ...item,
-              quantity:
-                type === "increase"
-                  ? item.quantity + 1
-                  : Math.max(1, item.quantity - 1),
-            }
+            ...item,
+            quantity:
+              type === "increase"
+                ? item.quantity + 1
+                : Math.max(1, item.quantity - 1),
+          }
           : item
       ),
     }));
@@ -37,57 +37,44 @@ export default function CartPage() {
           {cart.length === 0 ? (
             <p className="text-gray-300">Your cart is empty.</p>
           ) : (
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-4">
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/5 p-3 sm:p-4 rounded-xl shadow"
+                  className="flex items-center justify-between bg-gray-300 rounded-lg p-3 shadow"
                 >
-                  <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                  {/* Left: Image + Title/Price */}
+                  <div className="flex items-center gap-3 min-w-0">
                     <Image
                       src={item.image}
                       alt={item.title}
                       width={60}
                       height={90}
-                      className="rounded-lg shadow-md object-cover"
+                      className="rounded-lg object-cover flex-shrink-0"
                     />
-                    <div className="flex-1 min-w-0">
-                      <h2 className="text-md sm:text-lg font-semibold truncate">
+                    <div className="min-w-0">
+                      <h2 className="text-md font-semibold truncate text-gray-800">
                         {item.title}
                       </h2>
-                      <p className="text-sm sm:text-base text-gray-300">
+                      <p className="text-green-600 font-medium mt-1">
                         ₱{item.price.toFixed(2)}
                       </p>
                     </div>
                   </div>
 
-                  {/* Quantity Controls */}
-                  <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
-                    <button
-                      onClick={() => updateQuantity(item.id, "decrease")}
-                      className="px-3 py-1 sm:px-4 sm:py-2 rounded bg-purple-700 hover:bg-purple-600 transition"
-                    >
-                      -
-                    </button>
-                    <span className="px-2 sm:px-3">{item.quantity}</span>
-                    <button
-                      onClick={() => updateQuantity(item.id, "increase")}
-                      className="px-3 py-1 sm:px-4 sm:py-2 rounded bg-blue-700 hover:bg-blue-600 transition"
-                    >
-                      +
+                  {/* Right: Quantity + Delete */}
+                  <div className="flex items-center gap-2">
+                    <button className="px-3 py-1 bg-purple-600 text-white rounded">-</button>
+                    <span className="w-6 text-center">{item.quantity}</span>
+                    <button className="px-3 py-1 bg-blue-600 text-white rounded">+</button>
+                    <button className="text-red-500 ml-2">
+                      <Trash2 size={20} />
                     </button>
                   </div>
-
-                  {/* Remove Button */}
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-red-400 hover:text-red-300 transition mt-2 sm:mt-0"
-                  >
-                    <Trash2 size={20} />
-                  </button>
                 </div>
               ))}
             </div>
+
           )}
         </div>
 

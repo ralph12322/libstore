@@ -22,23 +22,23 @@ export default function Home() {
   const books = [
     {
       title: "The Great Gatsby",
-      price: "₱10",
+      price: "₱350",
       image: "https://m.media-amazon.com/images/I/410HvKUSIgL._SL500_.jpg",
     },
     {
       title: "1984",
-      price: "₱12",
+      price: "₱400",
       image:
         "https://www.aupress.ca/app/uploads/120320_How-Education-Works-cover.jpg",
     },
     {
       title: "To Kill a Mockingbird",
-      price: "₱15",
+      price: "₱350",
       image: "https://m.media-amazon.com/images/I/410HvKUSIgL._SL500_.jpg",
     },
     {
       title: "Pride and Prejudice",
-      price: "₱9",
+      price: "₱400",
       image:
         "https://www.aupress.ca/app/uploads/120320_How-Education-Works-cover.jpg",
     },
