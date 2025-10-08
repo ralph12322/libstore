@@ -64,17 +64,29 @@ export default function CartPage() {
 
                   {/* Right: Quantity + Delete */}
                   <div className="flex items-center gap-2">
-                    <button className="px-3 py-1 bg-purple-600 text-white rounded">-</button>
-                    <span className="w-6 text-center">{item.quantity}</span>
-                    <button className="px-3 py-1 bg-blue-600 text-white rounded">+</button>
-                    <button className="text-red-500 ml-2">
+                    <button 
+                      onClick={() => updateQuantity(item.id, "decrease")}
+                      className="px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
+                    >
+                      -
+                    </button>
+                    <span className="w-6 text-center text-gray-800 font-semibold">{item.quantity}</span>
+                    <button 
+                      onClick={() => updateQuantity(item.id, "increase")}
+                      className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                    >
+                      +
+                    </button>
+                    <button 
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-500 ml-2 hover:text-red-700 transition"
+                    >
                       <Trash2 size={20} />
                     </button>
                   </div>
                 </div>
               ))}
             </div>
-
           )}
         </div>
 
