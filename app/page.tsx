@@ -154,15 +154,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-6 sm:py-8 mt-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm sm:text-base">
-            © 2025 Read and Roam. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
