@@ -245,7 +245,7 @@ const AdminDashboard: React.FC = () => {
                 className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white"
               >
                 <option value="all">All Roles</option>
-                <option value="Admin">Admin</option>
+                <option value="admin">Admin</option>
                 <option value="seller">Seller</option>
                 <option value="customer">Customer</option>
               </select>
