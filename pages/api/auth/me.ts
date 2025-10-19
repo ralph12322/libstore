@@ -12,10 +12,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    const user = (payload as { user: { id: string; email: string, username: string } })?.user;
+    const user = (payload as { user: { id: string; email: string, username: string, role: string } })?.user;
     if (!user) return res.status(401).json({ error: 'Invalid token structure' });
-    console.log(user);
-    res.status(200).json({ email: user.email, username: user.username });
+    console.log(user)
+    res.status(200).json(user);
   } catch (err : any) {
     return res.status(401).json({ error: 'Invalid token' });
   }

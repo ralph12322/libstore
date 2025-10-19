@@ -9,6 +9,7 @@ interface Book {
   author: string;
   price: number;
   image: string;
+  seller: string;
 }
 
 export default function ShopPage() {
@@ -20,7 +21,7 @@ export default function ShopPage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("/api/admin/test");
+        const res = await fetch("/api/showBooks");
         const data = await res.json();
 
         // ensure unique IDs
@@ -90,6 +91,9 @@ export default function ShopPage() {
                   <p className="text-sm text-gray-500 mb-2">{book.author}</p>
                   <p className="text-purple-700 font-bold mb-3">
                     ₱{book.price.toFixed(2)}
+                  </p>
+                  <p className="text-sm text-gray-500 mb-2">
+                    Seller Gmail: {book.seller}
                   </p>
 
                   {inCart ? (

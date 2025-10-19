@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     username,
     email,
     password: hashedPassword,
-    role: 'User',
+    role: 'seller',
   });
 
   res.status(201).json({ message: 'User created successfully' });

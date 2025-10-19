@@ -7,10 +7,12 @@ import { usePathname } from "next/navigation";
 import { ShoppingCart, User, X, Menu } from "lucide-react";
 import logo from "../public/logo.png";
 import { useCartStore } from "@/lib/store/cartstore";
+import axios from "axios";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const pathname = usePathname();
   const cart = useCartStore((state) => state.cart);
 
@@ -19,15 +21,54 @@ export default function Navbar() {
     setMounted(true);
   }, []);
 
+  // Fetch user role whenever pathname changes OR user-updated event fires
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const { data } = await axios.get("/api/auth/me", {
+          withCredentials: true,
+        });
+        console.log("User data from API:", data); // Debug log
+        setUserRole(data.role || null);
+      } catch (error) {
+        console.log("Not authenticated or error:", error); // Debug log
+        setUserRole(null);
+      }
+    };
+
+    fetchUserRole();
+
+    // Listen for user-updated event from login/logout
+    const handleUserUpdate = () => {
+      fetchUserRole();
+    };
+
+    window.addEventListener("user-updated", handleUserUpdate);
+
+    return () => {
+      window.removeEventListener("user-updated", handleUserUpdate);
+    };
+  }, [pathname]); // Refetch when route changes
+
   // Calculate total items in cart
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-  const links = [
+  const baseLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
+
+  // Add role-specific links
+  const links = (() => {
+    if (userRole === "seller") {
+      return [...baseLinks, { name: "Seller Dashboard", href: "/seller" }];
+    } else if (userRole === "admin") {
+      return [...baseLinks, { name: "Admin Dashboard", href: "/admin" }];
+    }
+    return baseLinks;
+  })();
 
   return (
     <header className="sticky top-0 z-10 backdrop-blur-md bg-purple-900/80 shadow-lg border-b border-purple-700/50">
