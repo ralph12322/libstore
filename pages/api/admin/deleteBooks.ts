@@ -15,20 +15,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Verify token and extract user info
       const data = jwt.verify(token, process.env.JWT_SECRET as string) as any;
-
-    const bookId = req.body;
+      console.log("Authenticated user data:", data);
+      const { bookId } = req.body;
 
       if (!bookId) {
         return res.status(400).json({ message: "Book ID is required" });
       }
 
       // Find the book and ensure the seller owns it
-      const book = await Book.findOne({ _id: bookId, seller: data.user._id });
+      const book = await Book.findOne({ _id: bookId, seller: data.user.email });
       if (!book) {
         return res.status(404).json({ message: "Book not found or not authorized" });
       }
 
-      await Book.deleteOne({ _id: bookId, seller: data.user._id });
+      await Book.deleteOne({ _id: bookId, seller: data.user.email });
       return res.status(200).json({ message: "Book deleted successfully" });
 
     } catch (err: any) {

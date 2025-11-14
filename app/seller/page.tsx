@@ -92,7 +92,7 @@ const SellerPage: React.FC = () => {
     try {
       await axios.delete(`/api/admin/deleteBooks`, {
         withCredentials: true,
-        data: bookId
+        data: {bookId}
       });
 
       setBooks((prev) => prev.filter((book) => book._id !== bookId));
