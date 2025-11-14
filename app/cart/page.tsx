@@ -4,9 +4,18 @@ import { useCartStore } from "@/lib/store/cartstore";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import CheckoutButton from "@/components/CheckoutButton";
+import { useState } from "react";
 
 export default function CartPage() {
   const { cart, removeFromCart } = useCartStore();
+  const [address, setAddress] = useState({
+    fullName: "",
+    street: "",
+    city: "",
+    province: "",
+    zipCode: "",
+    phone: ""
+  });
 
   const updateQuantity = (id: number, type: "increase" | "decrease") => {
     useCartStore.setState((state) => ({
@@ -93,6 +102,60 @@ export default function CartPage() {
         {/* Order Summary */}
         <div className="bg-white/10 p-4 sm:p-6 rounded-2xl shadow-lg">
           <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
+          
+          {/* Address Form */}
+          {cart.length > 0 && (
+            <div className="mb-6 space-y-3">
+              <h3 className="text-lg font-semibold text-gray-200 mb-3">Delivery Address</h3>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={address.fullName}
+                onChange={(e) => setAddress({...address, fullName: e.target.value})}
+                className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <input
+                type="text"
+                placeholder="Street Address"
+                value={address.street}
+                onChange={(e) => setAddress({...address, street: e.target.value})}
+                className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={address.city}
+                  onChange={(e) => setAddress({...address, city: e.target.value})}
+                  className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <input
+                  type="text"
+                  placeholder="Province"
+                  value={address.province}
+                  onChange={(e) => setAddress({...address, province: e.target.value})}
+                  className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  placeholder="Zip Code"
+                  value={address.zipCode}
+                  onChange={(e) => setAddress({...address, zipCode: e.target.value})}
+                  className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone"
+                  value={address.phone}
+                  onChange={(e) => setAddress({...address, phone: e.target.value})}
+                  className="w-full px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+          )}
+          
           <div className="space-y-2 text-gray-200">
             <div className="flex justify-between">
               <span>Subtotal</span>
